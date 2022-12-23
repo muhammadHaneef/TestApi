@@ -24,5 +24,11 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-store_test_results:
+steps:
+      - run:
+          command: |
+            mkdir -p ~/phpunit
+            phpunit --log-junit ~/phpunit/junit.xml tests
+          when: always
+      - store_test_results:
           path: ~/phpunit
